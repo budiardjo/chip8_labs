@@ -10,3 +10,6 @@ all: ${OBJECTS}
 
 clean:
 	rm build/*
+
+run:
+	./bin/main

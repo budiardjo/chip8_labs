@@ -19,3 +19,7 @@
 - Sprites => each binary bit represent one pixel of the sprite
 
 ```
+* implement structure in chip8.h
+
+- memory
+- register

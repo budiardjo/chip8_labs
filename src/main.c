@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 
     struct chip8 chip8;
     // my first ampersand, dunno couldn't understand
-    chip8_memory_set(&chip8.memory, 50, 'Z');
+    chip8_memory_set(&chip8.memory, 0x400, 'Z');
     printf("%c\n", chip8_memory_get(&chip8.memory, 50));
 
     SDL_Init(SDL_INIT_EVERYTHING);
