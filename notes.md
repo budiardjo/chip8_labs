@@ -23,3 +23,4 @@
 
 - memory
 - register
+- stack
