@@ -30,7 +30,7 @@ void chip8_keyboard_up(struct chip8_keyboard* keyboard, int key)
     keyboard->keyboard[key] == false; // why it false
 }
 
-void chip8_keyboard_is_down(struct chip8_keyboard* keyboard, int key)
+bool chip8_keyboard_is_down(struct chip8_keyboard* keyboard, int key)
 {
     return keyboard->keyboard[key];
 }
