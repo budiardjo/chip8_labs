@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "SDL2/SDL.h"
 #include "chip8.h"
+#include "chip8keyboard.h"
 
 int main(int argc, char** argv)
 {
@@ -14,12 +16,18 @@ int main(int argc, char** argv)
     // printf("%c\n", chip8_memory_get(&chip8.memory, 50));
 
     // after, how clean is this
-    chip8.registers.SP = 0;
-    chip8_stack_push(&chip8, 0xff);
-    chip8_stack_push(&chip8, 0xaa);
+    // chip8.registers.SP = 0;
+    // chip8_stack_push(&chip8, 0xff);
+    // chip8_stack_push(&chip8, 0xaa);
 
-    printf("%x\n", chip8_stack_pop(&chip8));
-    printf("%x\n", chip8_stack_pop(&chip8));
+    // printf("%x\n", chip8_stack_pop(&chip8));
+    // printf("%x\n", chip8_stack_pop(&chip8));
+
+    // after make keyboard library become like this
+    chip8_keyboard_down(&chip8.keyboard, 0x0f);
+    bool is_down = chip8_keyboard_is_down(&chip8.keyboard, 0x0f);
+    printf("%i\n", (int)is_down);
+
 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window* window = SDL_CreateWindow(
