@@ -4,6 +4,13 @@
 #include "chip8.h"
 #include "chip8keyboard.h"
 
+const char keyboard_map[CHIP8_TOTAL_KEYS] = {
+    0xff, 0x01, 0x02, 0x03, 0x04, 0x05,
+    0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
+    0x0C, 0x0D, 0x0E, 0x0F
+};
+
+
 int main(int argc, char** argv)
 {
 
@@ -24,7 +31,10 @@ int main(int argc, char** argv)
     // printf("%x\n", chip8_stack_pop(&chip8));
 
     // after make keyboard library become like this
-    chip8_keyboard_down(&chip8.keyboard, 0x0f);
+    // chip8_keyboard_down(&chip8.keyboard, 0x0f);
+    // chip8_keyboard_up(&chip8.keyboard, 0x0f);
+    
+    printf("%x\n", chip8_keyboard_map(keyboard_map, 0xff));
     bool is_down = chip8_keyboard_is_down(&chip8.keyboard, 0x0f);
     printf("%i\n", (int)is_down);
 
