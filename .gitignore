@@ -1,3 +1,4 @@
 /include/SDL2/
 /bin/*
 /build/*
+/bin/main

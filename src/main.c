@@ -4,10 +4,24 @@
 #include "chip8.h"
 #include "chip8keyboard.h"
 
+
+// first time using go to definition in vs code
+// and try to understand how this feture works
+// what a cool feature
+// but sometimes it is easy to understand, some times
+
+// raw feature
+// const char keyboard_map[CHIP8_TOTAL_KEYS] = {
+//     0x00, 0x01, 0x02, 0x03, 0x04, 0x05,
+//     0x06, 0x07, 0xff, 0x09, 0x0A, 0x0B,
+//     0x0C, 0x0D, 0x0E, 0x0F
+// };
+
+// implementation in sdl library
 const char keyboard_map[CHIP8_TOTAL_KEYS] = {
-    0xff, 0x01, 0x02, 0x03, 0x04, 0x05,
-    0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B,
-    0x0C, 0x0D, 0x0E, 0x0F
+    SDLK_0, SDLK_1, SDLK_2, SDLK_3, SDLK_4, SDLK_5,
+    SDLK_6, SDLK_7, SDLK_8, SDLK_9, SDLK_a, SDLK_b,
+    SDLK_c, SDLK_d, SDLK_e, SDLK_f
 };
 
 
@@ -33,10 +47,11 @@ int main(int argc, char** argv)
     // after make keyboard library become like this
     // chip8_keyboard_down(&chip8.keyboard, 0x0f);
     // chip8_keyboard_up(&chip8.keyboard, 0x0f);
-    
-    printf("%x\n", chip8_keyboard_map(keyboard_map, 0xff));
-    bool is_down = chip8_keyboard_is_down(&chip8.keyboard, 0x0f);
-    printf("%i\n", (int)is_down);
+
+    // no longer to use this
+    // printf("%x\n", chip8_keyboard_map(keyboard_map, 0xff));
+    // bool is_down = chip8_keyboard_is_down(&chip8.keyboard, 0x0f);
+    // printf("%i\n", (int)is_down);
 
 
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -59,6 +74,39 @@ int main(int argc, char** argv)
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
+            // first time using switch
+            switch (event.type)
+            {
+
+                case SDL_QUIT:
+                    goto out;
+                break;
+
+                case SDL_KEYDOWN:
+                {
+                    // why this is weird and long?
+                    // what is keysysm?
+                    char key = event.key.keysym.sym;
+                    int vkey = chip8_keyboard_map(keyboard_map, key);
+                    if (vkey != -1)
+                    {
+                        chip8_keyboard_down(&chip8.keyboard, vkey);
+                    }
+                }
+                break;
+
+                case SDL_KEYUP:
+                {
+                    char key = event.key.keysym.sym;
+                    int vkey = chip8_keyboard_map(keyboard_map, key);
+                    if (vkey != -1)
+                    {
+                        chip8_keyboard_up(&chip8.keyboard, vkey);
+                    }
+                }
+                break;
+            };
+
             if (event.type == SDL_QUIT)
             {
                 goto out;
