@@ -53,6 +53,7 @@ int main(int argc, char** argv)
     // bool is_down = chip8_keyboard_is_down(&chip8.keyboard, 0x0f);
     // printf("%i\n", (int)is_down);
 
+    chip8_init(&chip8);
 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window* window = SDL_CreateWindow(
