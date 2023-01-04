@@ -28,11 +28,16 @@ bool chip8_screen_draw_sprite(struct chip8_screen* screen, int x, int y, const c
         for(int lx = 0; lx < 8; lx++ )
         {
             // seriously, bitwise operator???
-            // and using python repl
+            // and using python repl, using lot of modulo like 63 % 64 = 63
             if ((c & (0b10000000 >> lx)) == 0)
                 continue;
 
-            screen->pixels[ly+y][lx+x] = true;
+            if (screen->pixels[(ly+y) % CHIP8_HEIGHT][(lx+x) % CHIP8_WIDTH] ^= true)
+            {
+
+            }
+
+            screen->pixels[(ly+y) % CHIP8_HEIGHT][(lx+x) % CHIP8_WIDTH] ^= true; // that arrow(XOR) make me angry
         }
     }
     return pixel_collison;
