@@ -53,10 +53,12 @@ int main(int argc, char **argv)
     // printf("%i\n", (int)is_down);
 
     chip8_init(&chip8);
-    chip8.registers.delay_timer = 255;
+    chip8_load(&chip8, "Hello world", sizeof("Hello world"));
 
     // chip8_screen_set(&chip8.screen, 10, 1);
     chip8_screen_draw_sprite(&chip8.screen, 62, 10, &chip8.memory.memory[0x00], 5);
+
+
 
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(

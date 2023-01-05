@@ -3,6 +3,7 @@
 
 #define EMULATOR_WINDOW_TITLE "Chip8 Emulator"
 #define CHIP8_MEMORY_SIZE 4096
+#define CHIP8_PROGRAM_LOAD_ADDRESS 0x200 // just search in instruction
 #define CHIP8_WIDTH 64
 #define CHIP8_HEIGHT 32
 
