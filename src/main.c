@@ -26,6 +26,39 @@ const char keyboard_map[CHIP8_TOTAL_KEYS] = {
 
 int main(int argc, char **argv)
 {
+    if (argc < 2)
+    {
+        printf(" you must provide a file to load\n");
+        return -1;
+    }
+
+    // filename using char?
+    const char* filename = argv[1];
+    printf("the filename to load is: %s\n", filename);
+
+    // it using using rb in windows
+    FILE* f = fopen(filename, "r");
+    if (!f)
+    {
+        printf("failed to open the file");
+        return -1;
+    }
+
+    // weird function
+    fseek(f, 0, SEEK_END);
+    long size = ftell(f);
+    fseek(f, 0, SEEK_SET);
+
+    char buf[size];
+    int res = fread(buf, size, 1, f);
+    if ( res != 1)
+    {
+        printf("failed to read from file");
+        return -1;
+    }
+
+    printf("%s\n", buf);
+
 
     struct chip8 chip8;
     // before
@@ -53,7 +86,8 @@ int main(int argc, char **argv)
     // printf("%i\n", (int)is_down);
 
     chip8_init(&chip8);
-    chip8_load(&chip8, "Hello world", sizeof("Hello world"));
+    chip8_load(&chip8, buf, size);
+
 
     // chip8_screen_set(&chip8.screen, 10, 1);
     chip8_screen_draw_sprite(&chip8.screen, 62, 10, &chip8.memory.memory[0x00], 5);
@@ -154,6 +188,10 @@ int main(int argc, char **argv)
         //     chip8.registers.sound_timer -= 1;
         // }
 
+        unsigned short opcode = chip8_memory_get_short(&chip8.memory, chip8.registers.PC);
+        chip8_exec(&chip8, opcode);
+        chip8.registers.PC += 2; // it is 2 bytes
+        printf("%x\n", opcode);
     }
 
 out:
