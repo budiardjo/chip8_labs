@@ -104,10 +104,21 @@ int main(int argc, char **argv)
     // chip8_exec(&chip8, 0x5230);
 
     // printf("%x\n", chip8.registers.PC);
-    chip8.registers.V[0] = 0x20;
-    chip8.registers.V[1] = 0x30;
-    chip8_exec(&chip8, 0x8010);
-    printf("%x\n", chip8.registers.V[0]);
+    // chip8.registers.V[0] = 0x20;
+    // chip8.registers.V[1] = 0x30;
+    // chip8_exec(&chip8, 0x8010);
+    // printf("%x\n", chip8.registers.V[0]);
+
+    // chip8.registers.V[0] = 200;
+    // chip8.registers.V[1] = 50;
+    // chip8_exec(&chip8, 0x8014);
+    // printf("%i\n", chip8.registers.V[0]);
+    // printf("%i\n", chip8.registers.V[0x0f]);
+
+    chip8.registers.I = 0x00;
+    chip8.registers.V[0] = 10;
+    chip8.registers.V[1] = 10;
+    chip8_exec(&chip8, 0xD015);
 
 
     SDL_Init(SDL_INIT_EVERYTHING);
