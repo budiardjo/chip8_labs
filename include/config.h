@@ -13,5 +13,6 @@
 #define CHIP8_TOTAL_STACK_DEPTH 16
 #define CHIP8_TOTAL_KEYS 16
 #define CHIP8_CHARACTER_SET_LOAD_ADRESS 0x00 // the instruction said 0x000
+#define CHIP8_DEFAULT_SPRITE_HEIGHT 5
 
 #endif

@@ -121,6 +121,9 @@ int main(int argc, char **argv)
     // chip8_exec(&chip8, 0xD015);
 
     chip8_keyboard_set_map(&chip8.keyboard, keyboard_map);
+    // chip8.registers.V[0] = 0x00;
+    // chip8_exec(&chip8, 0xF00A);
+
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
         EMULATOR_WINDOW_TITLE,
@@ -205,7 +208,7 @@ int main(int argc, char **argv)
 
         if (chip8.registers.delay_timer > 0)
         {
-            sleep(100);
+            sleep(10);
             chip8.registers.delay_timer -= 1;
         }
 
