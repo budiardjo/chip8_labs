@@ -9,7 +9,7 @@ struct chip8_registers
     unsigned short I;
     unsigned char delay_timer;
     unsigned char sound_timer;
-    unsigned short PC;
+    unsigned short PC; // PC: Program Counter
     unsigned char SP;
 };
 

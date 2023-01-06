@@ -2,6 +2,7 @@
 
 * Read abstract instruction
 * How to use bitwise operator
+* Stack push and pop
 * XOR Operator
 * Implement some math equation
 * Hex editor neo as tool for calculate hex into byte

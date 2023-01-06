@@ -38,12 +38,52 @@ void chip8_load(struct chip8* chip8, const char* buf, size_t size)
     chip8->registers.PC = CHIP8_PROGRAM_LOAD_ADDRESS;
 }
 
+static void chip8_exec_extended(struct chip8* chip8, unsigned short opcode)
+{
+    unsigned short nnn = opcode & 0x0fff;
+    unsigned char x = (opcode >> 8) & 0x000f;
+    unsigned char kk = opcode & 0x00ff;
+    switch(opcode & 0xf000)
+    {
+        // bitwise operator things
+        case 0x1000:
+        // JP addr, 1nnn jump to location nnns
+            chip8->registers.PC = nnn;
+        break;
+
+        // CALL addr, Call subroutine at location nnn
+        case 0x2000:
+            chip8_stack_push(chip8, chip8->registers.PC);
+            chip8->registers.PC = nnn;
+        break;
+
+        // SE Vx, byte - 3xkk skip next instruction if Vx=kk
+        case 0x3000:
+            if (chip8->registers.V[x] == kk)
+            {
+                chip8->registers.PC += 2;
+            }
+
+        break;
+    }
+}
+
 void chip8_exec(struct chip8* chip8, unsigned short opcode)
 {
     switch(opcode)
     {
+        // CLS:clear the display
         case 0x00E0:
+            chip8_screen_clear(&chip8->screen);
+        break;
 
+        // Ret: Return from subroutine
+        case 0x00EE:
+            chip8->registers.PC = chip8_stack_pop(chip8);
+        break;
+
+        default:
+            chip8_exec_extended(chip8, opcode);
     }
 }
 

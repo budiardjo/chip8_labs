@@ -8,6 +8,8 @@ struct chip8_stack
     unsigned short stack[CHIP8_TOTAL_STACK_DEPTH];
 };
 
+
+// it is using stack push and pop
 void chip8_stack_push(struct chip8* chip8, unsigned short val);
 unsigned short chip8_stack_pop(struct chip8* chip8);
 
