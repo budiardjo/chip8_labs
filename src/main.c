@@ -115,12 +115,12 @@ int main(int argc, char **argv)
     // printf("%i\n", chip8.registers.V[0]);
     // printf("%i\n", chip8.registers.V[0x0f]);
 
-    chip8.registers.I = 0x00;
-    chip8.registers.V[0] = 10;
-    chip8.registers.V[1] = 10;
-    chip8_exec(&chip8, 0xD015);
+    // chip8.registers.I = 0x00;
+    // chip8.registers.V[0] = 10;
+    // chip8.registers.V[1] = 10;
+    // chip8_exec(&chip8, 0xD015);
 
-
+    chip8_keyboard_set_map(&chip8.keyboard, keyboard_map);
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
         EMULATOR_WINDOW_TITLE,
@@ -155,7 +155,7 @@ int main(int argc, char **argv)
                 // why this is weird and long?
                 // what is keysysm?
                 char key = event.key.keysym.sym;
-                int vkey = chip8_keyboard_map(keyboard_map, key);
+                int vkey = chip8_keyboard_map(&chip8.keyboard, key);
                 if (vkey != -1)
                 {
                     chip8_keyboard_down(&chip8.keyboard, vkey);
@@ -166,7 +166,7 @@ int main(int argc, char **argv)
             case SDL_KEYUP:
             {
                 char key = event.key.keysym.sym;
-                int vkey = chip8_keyboard_map(keyboard_map, key);
+                int vkey = chip8_keyboard_map(&chip8.keyboard, key);
                 if (vkey != -1)
                 {
                     chip8_keyboard_up(&chip8.keyboard, vkey);
