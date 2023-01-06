@@ -6,3 +6,4 @@
 * XOR Operator
 * Implement some math equation
 * Hex editor neo as tool for calculate hex into byte
+* Testing and debug every make a new function

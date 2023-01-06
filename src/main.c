@@ -98,6 +98,18 @@ int main(int argc, char **argv)
     // chip8_exec(&chip8, 0x3022);
     // printf("%x\n", chip8.registers.PC);
 
+    // chip8.registers.PC = 0;
+    // chip8.registers.V[2] = 0x10;
+    // chip8.registers.V[3] = 0x10;
+    // chip8_exec(&chip8, 0x5230);
+
+    // printf("%x\n", chip8.registers.PC);
+    chip8.registers.V[0] = 0x20;
+    chip8.registers.V[1] = 0x30;
+    chip8_exec(&chip8, 0x8010);
+    printf("%x\n", chip8.registers.V[0]);
+
+
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_Window *window = SDL_CreateWindow(
         EMULATOR_WINDOW_TITLE,

@@ -27,4 +27,4 @@ clean:
 	rm build/*
 
 run:
-	./bin/main
+	./bin/main ./bin/INVADERS
